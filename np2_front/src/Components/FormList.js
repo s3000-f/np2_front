@@ -1,26 +1,18 @@
 import React, {Component} from 'react'
 import { List, Avatar } from 'antd';
+import MenuList from '@material-ui/icons/List';
+import {Link} from "react-router-dom";
 
 class FormList extends Component {
-  data = [
-    {
-      title: 'Ant Design Title 1',
-    },
-    {
-      title: 'Ant Design Title 2',
-    },
-    {
-      title: 'Ant Design Title 3',
-    },
-    {
-      title: 'Ant Design Title 4',
-    },
-  ];
+  constructor() {
+    super();
+    this.state = {}
+  }
 
   componentDidMount () {
     fetch('http://localhost:3002/api/forms')
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => this.setState({'data': data}));
   }
 
   render () {
@@ -28,13 +20,12 @@ class FormList extends Component {
     return (
       <List
         itemLayout="horizontal"
-        dataSource={this.data}
+        dataSource={this.state.data}
         renderItem={item => (
           <List.Item>
             <List.Item.Meta
-              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-              title={<a href="https://ant.design">{item.title}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              avatar={<MenuList />}
+              title={<Link to={`/view/${item.id}`} >{item.title}</Link>}
             />
           </List.Item>
         )}

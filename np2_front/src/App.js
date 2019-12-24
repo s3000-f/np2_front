@@ -56,17 +56,17 @@ class App extends React.Component {
 
           <ButtonAppBar icon="shit"/>
           <Container>
-            <Box style={this.center} my={8}>
-              <Typography variant="h4" component="h1" gutterBottom>
-                Select A Form To Fill Out
-              </Typography>
-            </Box>
+            {/*<Box style={this.center} my={8}>*/}
+            {/*  <Typography variant="h4" component="h1" gutterBottom>*/}
+            {/*    Select A Form To Fill Out*/}
+            {/*  </Typography>*/}
+            {/*</Box>*/}
             <div>
 
               {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
               <Switch>
-                <Route path="/view">
+                <Route path="/view/:id">
                   {/*{this.swap("view")}*/}
                   <ViewForm/>
                 </Route>
@@ -74,9 +74,18 @@ class App extends React.Component {
                   {/*{this.swap("list")}*/}
                   <FormList/>
                 </Route>
-                <Route path="/">
+                <Route exact path="/">
                   {/*{this.swap("test")}*/}
                   <FormTest/>
+                </Route>
+                <Route path="*">
+                  <Box style={App.center} my={8}>
+                    <Typography variant="h4" component="h1" gutterBottom>
+                      404
+                      <br/>
+                      Page Not Found
+                    </Typography>
+                  </Box>
                 </Route>
               </Switch>
             </div>
